@@ -1,99 +1,148 @@
 import React from 'react';
+import { 
+  MapPin, Phone, Clock, MessageCircle, ExternalLink, 
+  ChevronRight, Award, ShieldCheck, Heart 
+} from 'lucide-react';
 
 export default function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
-    <footer className="bg-[#3D0C02] text-amber-50 pt-12 pb-6 border-t-4 border-amber-500">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+    <footer className="bg-[#180b0e] text-amber-50 pt-16 pb-8 border-t-2 border-[#FFC107]/40 relative overflow-hidden font-sans">
+      {/* Resplandor decorativo de fondo (Glow Effect) */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#5B0D18]/20 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        {/* Banner Superior de Confianza / Garantía */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pb-12 mb-12 border-b border-white/10">
+          <div className="flex items-center gap-4 bg-[#1e1215]/80 p-4 rounded-2xl border border-white/5 shadow-inner">
+            <div className="p-3 bg-amber-500/10 text-[#FFC107] rounded-xl shrink-0">
+              <Award className="w-6 h-6" />
+            </div>
+            <div>
+              <h4 className="text-sm font-bold text-white">Sabor Tradicional</h4>
+              <p className="text-xs text-gray-400">Receta caleña auténtica e ingredientes frescos.</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-4 bg-[#1e1215]/80 p-4 rounded-2xl border border-white/5 shadow-inner">
+            <div className="p-3 bg-emerald-500/10 text-emerald-400 rounded-xl shrink-0">
+              <ShieldCheck className="w-6 h-6" />
+            </div>
+            <div>
+              <h4 className="text-sm font-bold text-white">Domicilios Seguros</h4>
+              <p className="text-xs text-gray-400">Entrega rápida y empaques térmicos.</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-4 bg-[#1e1215]/80 p-4 rounded-2xl border border-white/5 shadow-inner">
+            <div className="p-3 bg-red-500/10 text-red-400 rounded-xl shrink-0">
+              <Heart className="w-6 h-6" />
+            </div>
+            <div>
+              <h4 className="text-sm font-bold text-white">Calidad Garantizada</h4>
+              <p className="text-xs text-gray-400">El Carmen de Viboral nos prefiere.</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Rejilla Principal del Footer */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           
-          {/* Columna 1: Logos e Información */}
+          {/* Columna 1: Marca & Redes */}
           <div className="space-y-4">
-            <div className="flex items-center space-x-3">
-              {/* Logo Oficial y Mascota */}
+            <div className="flex items-center gap-3">
               <img 
                 src="/IMG/37.jpeg" 
                 alt="Logo Sabor Caleño" 
-                className="h-12 w-auto object-contain rounded-md bg-white/10 p-1 border border-amber-400/40" 
+                className="h-14 w-auto object-contain rounded-xl bg-black/40 p-1 border border-amber-500/30 shadow-lg" 
               />
               <img 
                 src="/IMG/39.jpeg" 
                 alt="Mascota Sabor Caleño" 
-                className="h-12 w-auto object-contain rounded-md bg-white/10 p-1 border border-amber-400/40" 
+                className="h-14 w-auto object-contain rounded-xl bg-black/40 p-1 border border-amber-500/30 shadow-lg" 
               />
             </div>
             <div>
-              <span className="text-xl font-bold tracking-wide text-amber-400 block">
-                SABOR CALEÑO
+              <span className="text-2xl font-black tracking-wider text-white block">
+                SABOR <span className="text-[#FFC107]">CALEÑO</span>
               </span>
-              <p className="text-xs text-amber-200/80 font-semibold">El Carmen de Viboral</p>
+              <p className="text-xs text-emerald-400 font-bold uppercase tracking-widest mt-0.5">
+                El Carmen de Viboral
+              </p>
             </div>
-            <p className="text-sm text-amber-100/80 leading-relaxed">
-              El auténtico sabor del pollo asado, apanado y especialidades caleñas. Tradición y calidad en cada plato.
+            <p className="text-xs text-gray-300 leading-relaxed">
+              El auténtico sabor del pollo asado, apanado y especialidades caleñas. Tradición, crocancia y calidad en cada plato.
             </p>
-            <div className="flex space-x-3 pt-1">
+            <div className="pt-2">
               <a
                 href="https://wa.me/573146808787"
                 target="_blank"
                 rel="noreferrer"
-                className="bg-emerald-600 hover:bg-emerald-700 text-white p-2.5 rounded-full transition-colors duration-200"
-                title="WhatsApp"
+                className="inline-flex items-center gap-2 bg.emerald-600 hover:bg-emerald-500 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow-lg shadow-emerald-900/40 transition-all duration-300 hover:scale-105"
               >
-                <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                  <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
-                </svg>
+                <MessageCircle className="w-4 h-4 fill-current" />
+                Pedir por WhatsApp
               </a>
             </div>
           </div>
 
           {/* Columna 2: Horarios de Atención */}
           <div>
-            <h3 className="text-amber-400 font-bold text-lg mb-4 border-b border-amber-500/30 pb-2">
+            <h3 className="text-white font-bold text-base mb-4 flex items-center gap-2 border-b border-white/10 pb-2">
+              <Clock className="w-4 h-4 text-[#FFC107]" />
               Horarios de Atención
             </h3>
-            <ul className="space-y-2 text-sm text-amber-100/90">
-              <li className="flex justify-between">
-                <span>Lunes - Jueves:</span>
-                <span className="font-semibold text-amber-300">11:00 AM - 9:00 PM</span>
+            <ul className="space-y-3 text-xs text-gray-300">
+              <li className="flex justify-between items-center bg-white/5 p-2.5 rounded-lg border border-white/5">
+                <span className="text-gray-400">Lunes - Jueves:</span>
+                <span className="font-bold text-[#FFC107]">11:00 AM - 9:00 PM</span>
               </li>
-              <li className="flex justify-between">
-                <span>Viernes - Sábado:</span>
-                <span className="font-semibold text-amber-300">11:00 AM - 10:00 PM</span>
+              <li className="flex justify-between items-center bg-white/5 p-2.5 rounded-lg border border-white/5">
+                <span className="text-gray-400">Viernes - Sábado:</span>
+                <span className="font-bold text-[#FFC107]">11:00 AM - 10:00 PM</span>
               </li>
-              <li className="flex justify-between">
-                <span>Domingos y Festivos:</span>
-                <span className="font-semibold text-amber-300">11:00 AM - 9:00 PM</span>
+              <li className="flex justify-between items-center bg-white/5 p-2.5 rounded-lg border border-white/5">
+                <span className="text-gray-400">Domingos y Festivos:</span>
+                <span className="font-bold text-[#FFC107]">11:00 AM - 9:00 PM</span>
               </li>
             </ul>
           </div>
 
-          {/* Columna 3: Contacto */}
+          {/* Columna 3: Información de Contacto */}
           <div>
-            <h3 className="text-amber-400 font-bold text-lg mb-4 border-b border-amber-500/30 pb-2">
-              Contacto
+            <h3 className="text-white font-bold text-base mb-4 flex items-center gap-2 border-b border-white/10 pb-2">
+              <Phone className="w-4 h-4 text-[#FFC107]" />
+              Atención y Pedidos
             </h3>
-            <ul className="space-y-3 text-sm text-amber-100/90">
-              <li className="flex items-start space-x-2">
-                <svg className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                </svg>
-                <span>El Carmen de Viboral, Antioquia</span>
+            <ul className="space-y-3 text-xs text-gray-300">
+              <li className="flex items-start gap-3 bg-white/5 p-3 rounded-lg border border-white/5">
+                <MapPin className="w-5 h-5 text-[#FFC107] shrink-0 mt-0.5" />
+                <div>
+                  <strong className="block text-white font-semibold">Dirección Principal</strong>
+                  <span>El Carmen de Viboral, Antioquia</span>
+                </div>
               </li>
-              <li className="flex items-center space-x-2">
-                <svg className="w-5 h-5 text-amber-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
-                </svg>
-                <span>Domicilios: +57 314 680 8787</span>
+              <li className="flex items-start gap-3 bg-white/5 p-3 rounded-lg border border-white/5">
+                <Phone className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+                <div>
+                  <strong className="block text-white font-semibold">Línea Directa Domicilios</strong>
+                  <a href="tel:+573146808787" className="text-emerald-400 font-bold hover:underline">
+                    +57 314 680 8787
+                  </a>
+                </div>
               </li>
             </ul>
           </div>
 
-          {/* Columna 4: Mapa Interactivo de Google Maps */}
+          {/* Columna 4: Ubicación & Mapa */}
           <div>
-            <h3 className="text-amber-400 font-bold text-lg mb-4 border-b border-amber-500/30 pb-2">
+            <h3 className="text-white font-bold text-base mb-4 flex items-center gap-2 border-b border-white/10 pb-2">
+              <MapPin className="w-4 h-4 text-[#FFC107]" />
               Ubicación Exacta
             </h3>
-            <div className="w-full h-40 rounded-lg overflow-hidden border-2 border-amber-500/40 shadow-md relative group">
+            <div className="w-full h-44 rounded-xl overflow-hidden border border-white/10 shadow-2xl relative group">
               <iframe
                 title="Ubicación Sabor Caleño"
                 src="https://maps.google.com/maps?q=Sabor%20Cale%C3%B1o%20El%20Carmen%20de%20Viboral&t=&z=16&ie=UTF8&iwloc=&output=embed"
@@ -103,24 +152,31 @@ export default function Footer() {
                 allowFullScreen=""
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
+                className="filter contrast-105 brightness-95"
               ></iframe>
               <a
                 href="https://share.google/JUDl9iJy5ygOD5hYP"
                 target="_blank"
                 rel="noreferrer"
-                className="absolute bottom-1.5 right-1.5 bg-amber-500 hover:bg-amber-600 text-[#3D0C02] text-[11px] font-black px-2.5 py-1 rounded-md shadow-lg transition-colors z-10 flex items-center gap-1"
+                className="absolute bottom-2 right-2 bg-[#FFC107] hover:bg-amber-400 text-black font-extrabold text-[11px] px-3 py-1.5 rounded-lg shadow-xl transition-all duration-300 flex items-center gap-1.5 hover:scale-105"
               >
-                Abrir en Maps 📍
+                Abrir en Maps <ExternalLink className="w-3.5 h-3.5" />
               </a>
             </div>
           </div>
 
         </div>
 
-        {/* Derechos de autor */}
-        <div className="border-t border-amber-500/20 pt-4 text-center text-xs text-amber-200/60">
-          <p>© {new Date().getFullYear()} Sabor Caleño - El Carmen de Viboral. Todos los derechos reservados.</p>
+        {/* Sub-footer / Derechos de autor */}
+        <div className="border-t border-white/10 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-400">
+          <p>© {currentYear} <strong className="text-white">Sabor Caleño</strong> - El Carmen de Viboral. Todos los derechos reservados.</p>
+          <div className="flex gap-4">
+            <span className="hover:text-amber-400 cursor-pointer transition-colors">Términos del Servicio</span>
+            <span>•</span>
+            <span className="hover:text-amber-400 cursor-pointer transition-colors">Política de Privacidad</span>
+          </div>
         </div>
+
       </div>
     </footer>
   );

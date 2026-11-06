@@ -5,6 +5,7 @@ import Hero from './components/Hero'
 import MenuSection from './components/MenuSection'
 import Footer from './components/Footer'
 import CheckoutModal from './components/CheckoutModal'
+import AdminDashboard from './components/AdminDashboard'
 
 const Toast = Swal.mixin({
   toast: true,
@@ -143,13 +144,16 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#FFFBEA] text-[#3D080F] flex flex-col font-sans">
-      <Navbar 
-        currentStep={currentStep} 
-        setCurrentStep={setCurrentStep} 
-        cartCount={totalCount}
-        user={user}
-        onLogout={handleLogout}
-      />
+      {/* Ocultar la barra de navegación del cliente cuando se está en el Admin */}
+      {currentStep !== 'admin' && (
+        <Navbar 
+          currentStep={currentStep} 
+          setCurrentStep={setCurrentStep} 
+          cartCount={totalCount}
+          user={user}
+          onLogout={handleLogout}
+        />
+      )}
 
       {/* VISTA DE ACCESO Y REGISTRO */}
       {currentStep === 'access' && (
@@ -219,10 +223,21 @@ export default function App() {
             </button>
           </form>
 
-          <div className="text-center mt-4">
-            <button onClick={() => setIsRegistering(!isRegistering)} className="text-xs font-bold text-[#5B0D18] underline">
-              {isRegistering ? '¿Ya tienes cuenta? Inicia sesión' : '¿No tienes cuenta? Regístrate aquí'}
-            </button>
+          <div className="text-center mt-4 space-y-2">
+            <div>
+              <button onClick={() => setIsRegistering(!isRegistering)} className="text-xs font-bold text-[#5B0D18] underline">
+                {isRegistering ? '¿Ya tienes cuenta? Inicia sesión' : '¿No tienes cuenta? Regístrate aquí'}
+              </button>
+            </div>
+            {/* Acceso directo al Dashboard de Administración */}
+            <div className="pt-2 border-t border-amber-200">
+              <button 
+                onClick={() => setCurrentStep('admin')} 
+                className="text-xs text-amber-800 font-semibold hover:text-[#5B0D18] transition"
+              >
+                🔐 Acceso Administrador Sabor Caleño
+              </button>
+            </div>
           </div>
         </section>
       )}
@@ -247,7 +262,25 @@ export default function App() {
         </section>
       )}
 
-      <Footer />
+      {/* VISTA DEL DASHBOARD ADMINISTRADOR */}
+      {currentStep === 'admin' && (
+        <div className="w-full">
+          {/* Botón flotante superior para volver a la tienda web */}
+          <div className="bg-[#180e11] px-6 py-2 border-b border-white/10 flex justify-between items-center text-xs text-gray-400">
+            <span>Sabor Caleño • Modo Administración</span>
+            <button 
+              onClick={() => setCurrentStep('menu')}
+              className="bg-[#5B0D18] hover:bg-red-800 text-white font-bold px-3 py-1.5 rounded-lg text-xs transition"
+            >
+              ← Volver a la Tienda
+            </button>
+          </div>
+          <AdminDashboard />
+        </div>
+      )}
+
+      {/* Ocultar Footer cuando se está en el módulo Admin */}
+      {currentStep !== 'admin' && <Footer />}
     </div>
   )
 }

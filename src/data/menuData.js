@@ -6,7 +6,7 @@ export const menuCategories = [
   { id: 'sopas', name: 'Sopas' },
   { id: 'adicionales', name: 'Adicionales' },
   { id: 'limonadas', name: 'Limonadas' },
-  { id: 'jugos', name: 'Jugos Naturales' },
+  { id: 'jugos', name: 'Jugos Naturales' }, 
 ];
 
 export const menuProducts = [
