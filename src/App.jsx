@@ -46,8 +46,8 @@ export default function App() {
   const handleSubmitAuth = async (e) => {
     e.preventDefault()
 
-    const endpoint = isRegistering 
-      ? 'http://localhost/api/register' 
+    const endpoint = isRegistering
+      ? 'http://localhost/api/register'
       : 'http://localhost/api/login'
 
     try {
@@ -58,8 +58,8 @@ export default function App() {
           'Accept': 'application/json'
         },
         body: JSON.stringify(
-          isRegistering 
-            ? formData 
+          isRegistering
+            ? formData
             : { email: formData.email, password: formData.password }
         )
       })
@@ -143,12 +143,12 @@ export default function App() {
   }, 0)
 
   return (
-    <div className="min-h-screen bg-[#FFFBEA] text-[#3D080F] flex flex-col font-sans">
+    <div className="min-h-screen w-full overflow-x-clip bg-[#FFFBEA] text-[#3D080F] flex flex-col font-sans">
       {/* Ocultar la barra de navegación del cliente cuando se está en el Admin */}
       {currentStep !== 'admin' && (
-        <Navbar 
-          currentStep={currentStep} 
-          setCurrentStep={setCurrentStep} 
+        <Navbar
+          currentStep={currentStep}
+          setCurrentStep={setCurrentStep}
           cartCount={totalCount}
           user={user}
           onLogout={handleLogout}
@@ -169,51 +169,51 @@ export default function App() {
             {isRegistering && (
               <div>
                 <label className="block text-xs font-bold text-[#5B0D18] mb-1">Nombre Completo</label>
-                <input 
-                  type="text" 
-                  placeholder="Tu nombre" 
-                  required 
+                <input
+                  type="text"
+                  placeholder="Tu nombre"
+                  required
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full p-2.5 rounded-xl border border-amber-300 text-sm focus:outline-none focus:border-[#F4B312]" 
+                  className="w-full p-2.5 rounded-xl border border-amber-300 text-sm focus:outline-none focus:border-[#F4B312]"
                 />
               </div>
             )}
 
             <div>
               <label className="block text-xs font-bold text-[#5B0D18] mb-1">Correo Electrónico</label>
-              <input 
-                type="email" 
-                placeholder="correo@ejemplo.com" 
-                required 
+              <input
+                type="email"
+                placeholder="correo@ejemplo.com"
+                required
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="w-full p-2.5 rounded-xl border border-amber-300 text-sm focus:outline-none focus:border-[#F4B312]" 
+                className="w-full p-2.5 rounded-xl border border-amber-300 text-sm focus:outline-none focus:border-[#F4B312]"
               />
             </div>
 
             <div>
               <label className="block text-xs font-bold text-[#5B0D18] mb-1">Contraseña</label>
-              <input 
-                type="password" 
-                placeholder="••••••••" 
-                required 
+              <input
+                type="password"
+                placeholder="••••••••"
+                required
                 value={formData.password}
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                className="w-full p-2.5 rounded-xl border border-amber-300 text-sm focus:outline-none focus:border-[#F4B312]" 
+                className="w-full p-2.5 rounded-xl border border-amber-300 text-sm focus:outline-none focus:border-[#F4B312]"
               />
             </div>
 
             {isRegistering && (
               <div>
                 <label className="block text-xs font-bold text-[#5B0D18] mb-1">Confirmar Contraseña</label>
-                <input 
-                  type="password" 
-                  placeholder="••••••••" 
-                  required 
+                <input
+                  type="password"
+                  placeholder="••••••••"
+                  required
                   value={formData.password_confirmation}
                   onChange={(e) => setFormData({ ...formData, password_confirmation: e.target.value })}
-                  className="w-full p-2.5 rounded-xl border border-amber-300 text-sm focus:outline-none focus:border-[#F4B312]" 
+                  className="w-full p-2.5 rounded-xl border border-amber-300 text-sm focus:outline-none focus:border-[#F4B312]"
                 />
               </div>
             )}
@@ -231,8 +231,8 @@ export default function App() {
             </div>
             {/* Acceso directo al Dashboard de Administración */}
             <div className="pt-2 border-t border-amber-200">
-              <button 
-                onClick={() => setCurrentStep('admin')} 
+              <button
+                onClick={() => setCurrentStep('admin')}
                 className="text-xs text-amber-800 font-semibold hover:text-[#5B0D18] transition"
               >
                 🔐 Acceso Administrador Sabor Caleño
@@ -253,7 +253,7 @@ export default function App() {
       {/* VISTA DEL FLUJO DE PEDIDO (CHECKOUT) */}
       {currentStep === 'checkout' && (
         <section className="w-full px-4">
-          <CheckoutModal 
+          <CheckoutModal
             cartItems={cart}
             totalAmount={totalAmount}
             onBackToMenu={() => setCurrentStep('menu')}
@@ -268,7 +268,7 @@ export default function App() {
           {/* Botón flotante superior para volver a la tienda web */}
           <div className="bg-[#180e11] px-6 py-2 border-b border-white/10 flex justify-between items-center text-xs text-gray-400">
             <span>Sabor Caleño • Modo Administración</span>
-            <button 
+            <button
               onClick={() => setCurrentStep('menu')}
               className="bg-[#5B0D18] hover:bg-red-800 text-white font-bold px-3 py-1.5 rounded-lg text-xs transition"
             >
