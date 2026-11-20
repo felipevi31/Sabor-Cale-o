@@ -10,7 +10,7 @@ export default function MenuSection({ onAddToCart }) {
     : menuProducts.filter(p => p.category === selectedCategory);
 
   return (
-    <main id="menu" className="max-w-7xl mx-auto px-3 sm:px-6 py-8 sm:py-12 flex-1">
+    <main id="menu" className="w-full max-w-7xl mx-auto px-3 sm:px-6 py-8 sm:py-12 flex-1 overflow-x-clip">
       
       {/* Encabezado de la Carta */}
       <div className="text-center mb-6 sm:mb-10">
@@ -26,12 +26,12 @@ export default function MenuSection({ onAddToCart }) {
         </p>
       </div>
 
-      {/* Filtro de Categorías Moderno */}
-      <div className="flex items-center gap-2 sm:gap-2.5 overflow-x-auto py-2 px-1 mb-6 sm:mb-10 no-scrollbar justify-start sm:justify-center">
+      {/* Filtro de Categorías sin desbordamiento */}
+      <div className="flex items-center gap-2 overflow-x-auto md:flex-wrap py-2 px-1 mb-6 sm:mb-10 no-scrollbar justify-start md:justify-center">
         <button
           type="button"
           onClick={() => setSelectedCategory('all')}
-          className={`px-4 py-2 sm:px-5 sm:py-2.5 rounded-2xl text-xs font-black transition-all duration-300 whitespace-nowrap flex items-center gap-1.5 shrink-0 ${
+          className={`px-3.5 py-2 sm:px-4 sm:py-2 rounded-2xl text-xs font-black transition-all duration-200 whitespace-nowrap flex items-center gap-1.5 shrink-0 cursor-pointer ${
             selectedCategory === 'all'
               ? 'bg-[#5B0D18] text-[#F4B312] shadow-md shadow-[#5B0D18]/25 ring-2 ring-[#F4B312]/40'
               : 'bg-white text-[#5B0D18] border border-amber-200/80 hover:border-[#5B0D18]/50 hover:bg-amber-50/50'
@@ -40,12 +40,13 @@ export default function MenuSection({ onAddToCart }) {
           <Utensils className="w-3.5 h-3.5" />
           Todos los Productos
         </button>
+
         {menuCategories.map((cat) => (
           <button
             type="button"
             key={cat.id}
             onClick={() => setSelectedCategory(cat.id)}
-            className={`px-4 py-2 sm:px-5 sm:py-2.5 rounded-2xl text-xs font-black transition-all duration-300 whitespace-nowrap shrink-0 ${
+            className={`px-3.5 py-2 sm:px-4 sm:py-2 rounded-2xl text-xs font-black transition-all duration-200 whitespace-nowrap shrink-0 cursor-pointer ${
               selectedCategory === cat.id
                 ? 'bg-[#5B0D18] text-[#F4B312] shadow-md shadow-[#5B0D18]/25 ring-2 ring-[#F4B312]/40'
                 : 'bg-white text-[#5B0D18] border border-amber-200/80 hover:border-[#5B0D18]/50 hover:bg-amber-50/50'
@@ -61,7 +62,7 @@ export default function MenuSection({ onAddToCart }) {
         {filteredProducts.map((item) => (
           <div 
             key={item.id} 
-            className="group bg-white rounded-2xl sm:rounded-3xl overflow-hidden border border-amber-200/70 shadow-sm hover:shadow-2xl transition-all duration-300 flex flex-row sm:flex-col items-stretch justify-between sm:hover:-translate-y-1.5 p-2.5 sm:p-0 gap-3 sm:gap-0"
+            className="group bg-white rounded-2xl sm:rounded-3xl overflow-hidden border border-amber-200/70 shadow-sm hover:shadow-2xl transition-all duration-300 flex flex-row sm:flex-col items-stretch justify-between sm:hover:-translate-y-1.5 p-2.5 sm:p-0 gap-2.5 sm:gap-0 min-w-0"
           >
             {/* Contenedor de Imagen */}
             <div className="relative overflow-hidden w-24 h-24 sm:w-full sm:h-48 rounded-xl sm:rounded-none bg-amber-50 shrink-0 self-center sm:self-stretch">
@@ -79,11 +80,11 @@ export default function MenuSection({ onAddToCart }) {
 
             {/* Contenido: Título, Descripción y Fila de Precio + Botón Agregar */}
             <div className="flex-1 flex flex-col justify-between min-h-24 sm:min-h-0 sm:p-5 min-w-0">
-              <div>
+              <div className="min-w-0">
                 <span className="sm:hidden inline-block text-[9px] font-black text-[#5B0D18]/75 uppercase tracking-wider">
                   {item.category.replace('-', ' ')}
                 </span>
-                <h3 className="font-extrabold text-sm sm:text-lg text-[#5B0D18] group-hover:text-amber-700 transition-colors line-clamp-1">
+                <h3 className="font-extrabold text-sm sm:text-lg text-[#5B0D18] group-hover:text-amber-700 transition-colors truncate">
                   {item.name}
                 </h3>
                 <p className="text-[11px] sm:text-xs text-gray-600 mt-0.5 sm:mt-1.5 leading-snug sm:leading-relaxed line-clamp-2">
@@ -91,11 +92,11 @@ export default function MenuSection({ onAddToCart }) {
                 </p>
               </div>
 
-              {/* Pie con Precio a la izquierda y Botón Agregar a la derecha */}
-              <div className="pt-2.5 sm:pt-4 mt-1.5 sm:mt-auto flex items-center justify-between gap-2">
-                <div className="leading-none">
+              {/* Pie con Precio a la izquierda y Botón Agregar siempre visible a la derecha */}
+              <div className="pt-2 sm:pt-4 mt-1.5 sm:mt-auto flex items-center justify-between gap-2 min-w-0">
+                <div className="leading-none shrink-0">
                   <span className="hidden sm:block text-[10px] text-gray-400 uppercase font-bold tracking-tight mb-1">Precio</span>
-                  <span className="font-black text-[#5B0D18] text-base sm:text-lg">
+                  <span className="font-black text-[#5B0D18] text-sm sm:text-lg">
                     ${item.price.toLocaleString('es-CO')}
                   </span>
                 </div>
@@ -104,9 +105,9 @@ export default function MenuSection({ onAddToCart }) {
                   type="button"
                   onClick={() => onAddToCart?.(item)}
                   aria-label={`Agregar ${item.name} al carrito`}
-                  className="bg-[#F4B312] hover:bg-amber-400 text-[#5B0D18] font-black text-xs px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl sm:rounded-2xl transition-all duration-200 shadow-sm flex items-center gap-1 active:scale-95 shrink-0 cursor-pointer"
+                  className="bg-[#F4B312] hover:bg-amber-400 text-[#5B0D18] font-black text-xs px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl sm:rounded-2xl transition-all duration-200 shadow-sm flex items-center gap-1 active:scale-95 shrink-0 cursor-pointer"
                 >
-                  <Plus className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[3]" />
+                  <Plus className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[3] shrink-0" />
                   <span>Agregar</span>
                 </button>
               </div>
