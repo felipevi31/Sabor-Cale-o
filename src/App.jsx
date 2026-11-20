@@ -151,7 +151,7 @@ export default function App() {
 
       {/* VISTA DE ACCESO Y REGISTRO */}
       {currentStep === 'access' && (
-        <section className="max-w-md mx-auto my-12 p-6 bg-white rounded-2xl border-2 border-[#F4B312] shadow-xl w-full">
+        <section className="max-w-md mx-4 sm:mx-auto my-8 sm:my-12 p-6 bg-white rounded-2xl border-2 border-[#F4B312] shadow-xl w-auto sm:w-full">
           <h2 className="text-2xl font-black text-[#5B0D18] text-center mb-2">
             {isRegistering ? 'Crear Cuenta' : 'Iniciar Sesión'}
           </h2>
@@ -219,13 +219,18 @@ export default function App() {
 
           <div className="text-center mt-4 space-y-2">
             <div>
-              <button onClick={() => setIsRegistering(!isRegistering)} className="text-xs font-bold text-[#5B0D18] underline">
+              <button
+                type="button"
+                onClick={() => setIsRegistering(!isRegistering)}
+                className="text-xs font-bold text-[#5B0D18] underline"
+              >
                 {isRegistering ? '¿Ya tienes cuenta? Inicia sesión' : '¿No tienes cuenta? Regístrate aquí'}
               </button>
             </div>
             {/* Acceso directo al Dashboard de Administración */}
             <div className="pt-2 border-t border-amber-200">
               <button
+                type="button"
                 onClick={() => setCurrentStep('admin')}
                 className="text-xs text-amber-800 font-semibold hover:text-[#5B0D18] transition"
               >
@@ -263,6 +268,7 @@ export default function App() {
           <div className="bg-[#180e11] px-6 py-2 border-b border-white/10 flex justify-between items-center text-xs text-gray-400">
             <span>Sabor Caleño • Modo Administración</span>
             <button
+              type="button"
               onClick={() => setCurrentStep('menu')}
               className="bg-[#5B0D18] hover:bg-red-800 text-white font-bold px-3 py-1.5 rounded-lg text-xs transition"
             >
