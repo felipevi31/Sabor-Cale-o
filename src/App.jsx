@@ -6,6 +6,7 @@ import MenuSection from './components/MenuSection'
 import Footer from './components/Footer'
 import CheckoutModal from './components/CheckoutModal'
 import AdminDashboard from './components/AdminDashboard'
+import { apiFetch } from './services/api'
 
 const Toast = Swal.mixin({
   toast: true,
@@ -46,17 +47,11 @@ export default function App() {
   const handleSubmitAuth = async (e) => {
     e.preventDefault()
 
-    const endpoint = isRegistering
-      ? 'http://localhost/api/register'
-      : 'http://localhost/api/login'
+    const endpoint = isRegistering ? '/register' : '/login'
 
     try {
-      const response = await fetch(endpoint, {
+      const { response, data } = await apiFetch(endpoint, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
         body: JSON.stringify(
           isRegistering
             ? formData
@@ -64,11 +59,10 @@ export default function App() {
         )
       })
 
-      const data = await response.json()
-
       if (response.ok) {
-        if (data.access_token) {
-          localStorage.setItem('auth_token', data.access_token)
+        const token = data.access_token || data.token
+        if (token) {
+          localStorage.setItem('auth_token', token)
         }
         if (data.user) {
           localStorage.setItem('auth_user', JSON.stringify(data.user))

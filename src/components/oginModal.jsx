@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { apiFetch } from '../services/api';
 
 export default function LoginModal({ isOpen, onClose }) {
   const [isRegistering, setIsRegistering] = useState(false);
@@ -14,36 +15,33 @@ export default function LoginModal({ isOpen, onClose }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const endpoint = isRegistering 
-      ? 'http://localhost/api/register' 
-      : 'http://localhost/api/login';
+    const endpoint = isRegistering ? '/register' : '/login';
 
-    const response = await fetch(endpoint, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify(formData)
-    });
+    try {
+      const { response, data } = await apiFetch(endpoint, {
+        method: 'POST',
+        body: JSON.stringify(formData)
+      });
 
-    const data = await response.json();
-
-    if (response.ok) {
-      console.log('Éxito:', data);
-      if (data.token) {
-        localStorage.setItem('auth_token', data.token);
+      if (response.ok) {
+        console.log('Éxito:', data);
+        const token = data.access_token || data.token;
+        if (token) {
+          localStorage.setItem('auth_token', token);
+        }
+        onClose();
+      } else {
+        console.error('Error:', data);
       }
-      onClose();
-    } else {
-      console.error('Error:', data);
+    } catch (error) {
+      console.error('Error al conectar con la API:', error);
     }
   };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
       <div className="relative w-full max-w-md bg-[#FFFDF6] rounded-2xl border-2 border-amber-400 p-8 shadow-2xl">
-        <button 
+        <button
           onClick={onClose}
           className="absolute top-4 right-4 text-amber-950/60 hover:text-amber-950 text-xl font-bold"
         >
