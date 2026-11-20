@@ -6,6 +6,11 @@ import {
 } from 'lucide-react';
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell } from 'recharts';
 
+const API_BASE_URL = (
+  import.meta.env.VITE_API_URL ||
+  'https://glistening-fulfillment-production-62866012.up.railway.app'
+).replace(/\/+$/, '');
+
 export default function AdminDashboard() {
   const [timeRange, setTimeRange] = useState('hoy');
   const [orders, setOrders] = useState([]);
@@ -39,7 +44,7 @@ export default function AdminDashboard() {
     }
 
     try {
-      const response = await fetch(`http://localhost/api/admin/metrics?range=${timeRange}`, {
+      const response = await fetch(`${API_BASE_URL}/api/admin/metrics?range=${timeRange}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -72,7 +77,7 @@ export default function AdminDashboard() {
     setDownloading(reportType);
     try {
       const token = localStorage.getItem('auth_token');
-      const response = await fetch(`http://localhost/api/admin/reports/${endpoint}`, {
+      const response = await fetch(`${API_BASE_URL}/api/admin/reports/${endpoint}`, {
         method: 'GET',
         headers: { 
           'Authorization': `Bearer ${token}`,
